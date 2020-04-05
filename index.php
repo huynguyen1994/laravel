@@ -1,2 +1,2 @@
 <?php
-require_once ('server.php');
+include_once('server.php');
