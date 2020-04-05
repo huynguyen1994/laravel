@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Validator, Redirect, Response;
+use Auth;
 use App\Http\Models\User;
 use Session;
-use Illuminate\Support\Facades\DB;
+use Socialite;
 
 class LoginController extends Controller
 {
@@ -41,28 +42,16 @@ class LoginController extends Controller
      */
     public function store(Request $request)
     {
-
         $validatedData = $request->validate([
             'email' => 'required|max:255',
             'password' => 'required|max:255',
         ]);
-
         if ($validatedData) {
-            $email = trim($request->input('email'));
-            $password = trim($request->input('password'));
-            $password = md5('git'.$password);
-            $users = DB::table('users')->where([
-                ['email', '=', $email],
-                ['password', '=', $password],
-            ])->first();
-            if ($users) {
-                $sessionInfo = [
-                    'id' => $users->id,
-                    'email' => $users->email,
-                    'name' => $users->name,
-                    'phone' => $users->phone
-                ];
-                $request->session()->put('users', $sessionInfo);
+            $userData = [
+                'email' => trim($request->input('email')),
+                'password' => trim($request->input('password'))
+            ];
+            if (Auth::attempt($userData)) {
                 return redirect()->route('backend.dashboard');
             } else {
                 Session::flash('error', 'Email hoặc mật khẩu không đúng!');
@@ -71,8 +60,9 @@ class LoginController extends Controller
         }
     }
 
-    public function logout(Request $request) {
-        $request->session()->forget('users');
+    public function logout(Request $request)
+    {
+        Auth::logout();
         return redirect('/');
     }
     /**
@@ -81,9 +71,32 @@ class LoginController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function redirectToProvider()
     {
-        //
+
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    public function handleProviderCallback()
+    {
+        $user = Socialite::driver('facebook')->user();
+        $authUser = $this->findOrCreateUser($user);
+        Auth::login($authUser);
+        return redirect('/backend');
+    }
+    private function findOrCreateUser($user)
+    {
+        $authUser = User::where('social_id', $user->id)->first();
+        if ($authUser) {
+            return $authUser;
+        } else {
+            return User::create([
+                'name' => $user->name,
+                'email' => $user->email,
+                'remember_token' => $user->token,
+                'social_id' => $user->id,
+            ]);
+        }
     }
 
     /**

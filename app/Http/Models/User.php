@@ -1,13 +1,15 @@
 <?php
+namespace App\Http\Models;
 
 use Illuminate\Contracts\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notification;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+
     use Notifiable;
-    public $table = "user";
+    public $table = "users";
     public $primaryKey = "id";
     public $timestamps = true;
 
@@ -16,6 +18,6 @@ class User extends Authenticatable
     ];
 
     protected  $hidden = [
-        'password', 'remember_token',
+        'password',
     ];
 }

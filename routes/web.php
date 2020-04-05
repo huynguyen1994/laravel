@@ -15,10 +15,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'LoginController@index')->name('login');
 Route::post('post-login', 'LoginController@store');
-Route::post('logout', 'LoginController@logout')->name('logout');
-Route::group(['middleware' => 'admin', 'prefix' => 'backend', 'namespace' => 'Backend'], function() {
+Route::get('logout', 'LoginController@logout')->name('logout');
+Route::group([ 'middleware' => 'adminMiddleware','prefix' => 'backend', 'namespace' => 'Backend'], function() {
     Route::get("/", "DashBoardController@index")->name("backend.dashboard");
     Route::get("users", 'UsersController@index')->name("backend.users.index");
 });
-Route::get('callback/{social}', 'HomeController@handleProviderCallback');
-Route::get('login/{social}', 'HomeController@redirectProvider')->name('login.social');
+Route::get('login/facebook', 'LoginController@redirectToProvider');
+Route::get('login/facebook/callback', 'LoginController@handleProviderCallback');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

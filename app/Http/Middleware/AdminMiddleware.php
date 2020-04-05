@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
+
 class AdminMiddleware
 {
     /**
@@ -17,11 +18,10 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $session_user = $request->session()->get('users');
-        if ($session_user) {
+        if (Auth::check()) {
             return $next($request);
         } else {
-            return redirect()->route('login');
+            return redirect('/');
         }
     }
 }
