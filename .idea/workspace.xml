@@ -66,7 +66,7 @@
         <entry file="file://$PROJECT_DIR$/config/view.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="63">
-              <caret line="3" selection-start-line="3" selection-end-line="3" />
+              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
             </state>
           </provider>
         </entry>
@@ -372,16 +372,15 @@
       <workItem from="1586077985395" duration="13808000" />
       <workItem from="1586140190927" duration="10250000" />
       <workItem from="1586175639528" duration="2843000" />
-      <workItem from="1586183665874" duration="2091000" />
+      <workItem from="1586183665874" duration="2342000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="106408000" />
+    <option name="totallyTimeSpent" value="106659000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2655068" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -690,7 +689,7 @@
     <entry file="file://$PROJECT_DIR$/config/view.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="63">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
