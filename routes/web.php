@@ -23,6 +23,9 @@ Route::group([ 'middleware' => 'adminMiddleware','prefix' => 'backend', 'namespa
 Route::get('login/facebook', 'LoginController@redirectToProvider');
 Route::get('login/facebook/callback', 'LoginController@handleProviderCallback');
 
-Auth::routes();
+
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('redirect', 'LoginController@redirect');
+Route::get('callback', 'LoginController@callback');
+Auth::routes();
