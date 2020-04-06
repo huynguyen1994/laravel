@@ -1,7 +1,11 @@
 <?php
 
 use Illuminate\Support\Str;
-
+$url = parse_url(getenv("DATABASE_URL"));
+$host = $url['host'];
+$userName = $url['user'];
+$password = $url['pass'];
+$database = substr($url['path'], 1);
 return [
 
     /*
@@ -15,7 +19,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'pgsql_product'),
 
     /*
     |--------------------------------------------------------------------------
@@ -76,6 +80,17 @@ return [
             'prefix_indexes' => true,
             'schema' => 'public',
             'sslmode' => 'prefer',
+        ],
+
+        'pgsql_product' => [
+            'driver' => 'pgsql',
+            'host' => $host,
+            'database' => $database,
+            'username' => $userName,
+            'password' => $password,
+            'charset' => 'utf8',
+            'prefix' => '',
+            'sslmode' => 'prefer'
         ],
 
         'sqlsrv' => [
