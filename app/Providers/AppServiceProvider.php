@@ -14,10 +14,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(UrlGenerator $url)
     {
-        if (env('REDIRECT_HTTPS')) {
-            $url->forceScheme('https');
-        }
-        // URL::forceScheme('https');
+//        if (env('REDIRECT_HTTPS')) {
+//            $url->forceScheme('https');
+//        }
+         URL::forceScheme('https');
     }
 
     /**
@@ -27,8 +27,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if (env('REDIRECT_HTTPS')) {
-            $this->app['request']->server->set('HTTPS', true);
-        }
+//        if (env('REDIRECT_HTTPS')) {
+//            $this->app['request']->server->set('HTTPS', true);
+//        }
     }
 }
