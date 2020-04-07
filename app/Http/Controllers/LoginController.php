@@ -144,47 +144,18 @@ class LoginController extends Controller
     public function callback()
     {
         try {
-            $googleUser = Socialite::driver('google')->user();
-            $existingUser = User::where('email', $googleUser->email)->first();
-            if ($existingUser) {
-                dd($existingUser);
-                // log them in
-                Auth::login($googleUser);
-            } else {
-                // create a new user
-                dd(1);
-                $newUser = $this->findOrCreateUser($googleUser);
-                Auth::login($newUser);
-                return redirect('/backend');
-            }
+            $user = Socialite::driver('google')->stateless()->user();
         } catch (\Exception $e) {
-            return 'error';
+            return redirect('/');
         }
-//        try {
-//            $user = Socialite::driver('google')->user();
-//        } catch (\Exception $e) {
-//            return redirect('/login');
-//        }
-//        // only allow people with @company.com to login
-//        if (explode("@", $user->email)[1] !== 'company.com') {
-//            return redirect()->to('/');
-//        }
-//        // check if they're an existing user
-//        $existingUser = User::where('email', $user->email)->first();
-//        if ($existingUser) {
-//            // log them in
-//            auth()->login($existingUser, true);
-//        } else {
-//            // create a new user
-//            $newUser = new User;
-//            $newUser->name = $user->name;
-//            $newUser->email = $user->email;
-//            $newUser->google_id = $user->id;
-//            $newUser->avatar = $user->avatar;
-//            $newUser->avatar_original = $user->avatar_original;
-//            $newUser->save();
-//            auth()->login($newUser, true);
-//        }
-        //        return redirect()->to('/backend');
+
+        $existingUser = User::where('email', $user->email)->first();
+        if ($existingUser) {
+            auth()->login($existingUser, true);
+        } else {
+            $newUser = $this->findOrCreateUser($user);
+            Auth::login($newUser);
+            return redirect('/backend');
+        }
     }
 }

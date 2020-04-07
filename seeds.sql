@@ -1,0 +1,3 @@
+INSERT INTO users (name, email, password, social_id, remember_token, phone, birthday, created_at, updated_at)
+VALUES ('nguyenhuy', 'huyhuy@gmail.com', '$2y$10$wgspABs136KXXXhoWgThD.vpf7xyEpySul47EOCtQAEqRq5TpZwpO', null, null, 799086139, null, '2020-04-03 16:40:19', '2020-04-03 16:40:19')), 
+	   ('Trà Lài', 'nguyenlamphuochuy2@gmail.com', NULL, '2635538830027298', NULL, NULL, NULL, '2020-04-03 16:40:19', '2020-04-03 16:40:19');
