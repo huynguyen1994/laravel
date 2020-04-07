@@ -43,7 +43,7 @@
             <i class="fa fa-facebook-official"></i>Facebook
         </a>
         <a href="redirect" class="btn-google m-b-10">
-            <img src="{{ asset('images/icons/icon-google.png') }}" alt="GOOGLE">
+            <img src="{{ asset('public/images/icons/icon-google.png') }}" alt="GOOGLE">
             Google
         </a>
         <div class="text-center w-full p-t-115">

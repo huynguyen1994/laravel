@@ -13,8 +13,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('public/animate/animate.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('public/css-hamburgers/hamburgers.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('public/select2/select2.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/util.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/css/util.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/css/main.css') }}">
 </head>
 <body>
 
@@ -25,11 +25,11 @@
         </div>
     </div>
 </div>
-<script src="{{ asset('jquery/jquery-3.2.1.min.js') }}"></script>
-<script src="{{ asset('bootstrap/js/popper.js') }}"></script>
-<script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('select2/select2.min.js') }}"></script>
-<script src="{{ asset('js/main.js') }}"></script>
+<script src="{{ asset('public/jquery/jquery-3.2.1.min.js') }}"></script>
+<script src="{{ asset('public/bootstrap/js/popper.js') }}"></script>
+<script src="{{ asset('public/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('public/select2/select2.min.js') }}"></script>
+<script src="{{ asset('public/js/main.js') }}"></script>
 
 </body>
 </html>
