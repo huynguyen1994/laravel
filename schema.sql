@@ -5,7 +5,7 @@ CREATE TABLE users (
 	password VARCHAR(255),
 	social_id VARCHAR(255),
 	remember_token VARCHAR(100),
-	phone INTEGER(10),
+	phone INTEGER,
 	birthday DATE,
 	created_at TIMESTAMP,
 	updated_at TIMESTAMP,
