@@ -33,7 +33,7 @@ return [
     'facebook' => [
         'client_id' => env('FACEBOOK_CLIENT_ID'),
         'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
-        'redirect' => 'http://localhost:8088/login/facebook/callback',
+        'redirect' => 'https://agile-dawn-43433.herokuapp.com/login/facebook/callback',
     ],
     'google' => [
         'client_id' => '288559908155-drg8nfcp6dvc4dj31fqt5s74aggvvdb0.apps.googleusercontent.com',
