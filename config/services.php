@@ -38,6 +38,6 @@ return [
     'google' => [
         'client_id' => '288559908155-drg8nfcp6dvc4dj31fqt5s74aggvvdb0.apps.googleusercontent.com',
         'client_secret' => 'HjfKrhy015WXZ26vTO3bcfWM',
-        'redirect' => 'https://agile-dawn-43433.herokuapp.com'
+        'redirect' => 'https://agile-dawn-43433.herokuapp.com/backend'
     ],
 ];
