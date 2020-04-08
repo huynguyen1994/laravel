@@ -31,8 +31,8 @@ return [
     ],
 
     'facebook' => [
-        'client_id' => env('FACEBOOK_CLIENT_ID'),
-        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
+        'client_id' => '641826620004365',
+        'client_secret' => '0594afb4156c5cf6b097b377f7f63765',
         'redirect' => 'https://agile-dawn-43433.herokuapp.com/login/facebook/callback',
     ],
     'google' => [
