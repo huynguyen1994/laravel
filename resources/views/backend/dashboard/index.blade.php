@@ -11,7 +11,8 @@
                                 <span class="sr-only">Close</span>
                             </button>
                         </div>
-                    @elseif( Seesion::has('error'))
+                    @endif
+                    @if( Seesion::has('error'))
                         <div class="alert alert-error alert-dismissible" role="alert">
                             <strong>{{ Session::get('error') }}</strong>
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
