@@ -12,15 +12,6 @@
                             </button>
                         </div>
                     @endif
-                    @if( Seesion::has('error'))
-                        <div class="alert alert-error alert-dismissible" role="alert">
-                            <strong>{{ Session::get('error') }}</strong>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                <span class="sr-only">Close</span>
-                            </button>
-                        </div>
-                    @endif
                 <div class="page-breadcrumb">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
