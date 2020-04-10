@@ -19,7 +19,7 @@
 <div class="dashboard-main-wrapper">
     <div class="dashboard-header">
         <nav class="navbar navbar-expand-lg bg-white fixed-top">
-            <a class="navbar-brand" href="index.html">Concept</a>
+            <a class="navbar-brand" href="/">DASHBOARD</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -31,14 +31,18 @@
                         </div>
                     </li>
                     <li class="nav-item dropdown nav-user">
+
+                    </li>
+                    <li class="nav-item dropdown nav-user">
+                        <div class="p-l-20">
+                        <?php    $user = Auth::user()->name; echo $user??""; ?>
+                        </div>
                         <a class="dropdown-item" href="{{ route('logout') }}"><i class="fas fa-power-off mr-2"></i>Logout</a>
                     </li>
                 </ul>
-
             </div>
         </nav>
     </div>
-
     <div class="nav-left-sidebar sidebar-dark">
         <div class="menu-list">
             <nav class="navbar navbar-expand-lg navbar-light">
@@ -52,7 +56,6 @@
                             <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Dashboard <span class="badge badge-success">6</span></a>
                             <div id="submenu-1" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
-
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('backend.users.index') }}">User</a>
                                     </li>
@@ -68,25 +71,8 @@
         <div class="dashboard-ecommerce">
             <div class="container-fluid dashboard-content ">
 
-                <div class="row">
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        <div class="page-header">
-
-                            <div class="page-breadcrumb">
-                                <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">E-Commerce Dashboard Template</li>
-                                    </ol>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="ecommerce-widget">
                     @yield('main')
-
-
                 </div>
             </div>
         </div>
@@ -121,5 +107,6 @@
 <script src="{{ asset('public/assets/vendor/charts/c3charts/d3-5.4.0.min.js') }}"></script>
 <script src="{{ asset('public/assets/vendor/charts/c3charts/C3chartjs.js') }}"></script>
 <script src="{{ asset('public/assets/libs/js/dashboard-ecommerce.js') }}"></script>
+<script src="{{ asset('public/assets/vendor/parsley/parsley.js') }}" ></script>
 </body>
 </html>

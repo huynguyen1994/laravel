@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Validator, Redirect, Response;
 use Auth;
 use App\Http\Models\User;
@@ -19,9 +20,12 @@ class LoginController extends Controller
      */
     public function index()
     {
+        if (Auth::check()) {
+            return redirect('/backend');
+        } else {
+            return view('login');
+        }
 
-
-        return view('login');
     }
 
     /**
@@ -52,7 +56,7 @@ class LoginController extends Controller
                 'password' => trim($request->input('password'))
             ];
             if (Auth::attempt($userData)) {
-                return redirect()->route('backend.dashboard');
+                return redirect()->route('backend.dashboard')->with('success', 'Đăng nhập thành công !!!');
             } else {
                 Session::flash('error', 'Email hoặc mật khẩu không đúng!');
                 return redirect('/');

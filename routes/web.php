@@ -19,6 +19,11 @@ Route::get('logout', 'LoginController@logout')->name('logout');
 Route::group([ 'middleware' => 'adminMiddleware','prefix' => 'backend', 'namespace' => 'Backend'], function() {
     Route::get("/", "DashBoardController@index")->name("backend.dashboard");
     Route::get("users", 'UsersController@index')->name("backend.users.index");
+    Route::get("users/create", 'UsersController@create')->name("backend.users.create");
+    Route::post("users/store", 'UsersController@store')->name("backend.users.store");
+    Route::get("users/destroy/{id}", 'UsersController@destroy')->name("backend.users.destroy");
+    Route::get("users/edit/{id}", 'UsersController@edit')->name("backend.users.edit");
+    Route::post("users/update/{id}", 'UsersController@update')->name("backend.users.update");
 });
 Route::get('login/facebook', 'LoginController@redirectToProvider');
 Route::get('login/facebook/callback', 'LoginController@handleProviderCallback');
