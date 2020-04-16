@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Models\User;
+use Illuminate\Http\UploadedFile;
+
 
 class UsersController extends Controller
 {
@@ -124,4 +126,21 @@ class UsersController extends Controller
         }
     }
 
+    public function editProfile()
+    {
+        return view("backend.users.editProfile");
+    }
+    public function updateProfile(Request $request)
+    {
+        return redirect('/');
+//        $file = $request->file('photo');
+//
+//        $data = imagewebp($file, 'converted.webp');
+//        echo "<pre>";
+//        var_dump($data);
+//
+//        echo "<pre>";
+//        var_dump($request->all());
+//            dd($request->file('photo'));
+    }
 }

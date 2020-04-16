@@ -163,4 +163,27 @@ class LoginController extends Controller
             return redirect('/backend');
         }
     }
+
+    public function redirectToProviderLine()
+    {
+        return Socialite::driver('line')->stateless()->redirect();
+    }
+
+    public function handleProviderCallBackLine(Request $request, SocialAccountsService $accountService, $provider)
+    {
+        try {
+            $user = Socialite::with($provider)->user();
+        }catch (Exception $e) {
+            Session::flash('error', 'Lỗi đăng nhập Line');
+            return redirect()->route('/');
+        }
+        $authUser = $accountService->find($user, $provider);
+        if ($authUser) {
+            Auth::login($authUser);
+            return redirect('/backend');
+        } else {
+            \Session::put("line_user_id", $user->id);
+            return redirect()->route('register');
+        }
+    }
 }

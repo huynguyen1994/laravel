@@ -24,6 +24,9 @@ Route::group([ 'middleware' => 'adminMiddleware','prefix' => 'backend', 'namespa
     Route::get("users/destroy/{id}", 'UsersController@destroy')->name("backend.users.destroy");
     Route::get("users/edit/{id}", 'UsersController@edit')->name("backend.users.edit");
     Route::post("users/update/{id}", 'UsersController@update')->name("backend.users.update");
+
+    Route::get('users/editProfile', 'UsersController@editProfile')->name('backend.users.editProfile');
+    Route::post('users/updateProfile', 'UsersController@updateProfile')->name('backend.users.updateProfile');
 });
 Route::get('login/facebook', 'LoginController@redirectToProvider');
 Route::get('login/facebook/callback', 'LoginController@handleProviderCallback');
@@ -33,4 +36,6 @@ Route::get('login/facebook/callback', 'LoginController@handleProviderCallback');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('redirect', 'LoginController@redirect');
 Route::get('callback', 'LoginController@callback');
+Route::get('/login/{provider}', 'LoginController@redirectToProviderLine')->name('login.line');
+Route::get('/login/{provider}/callback', 'LoginController@handleProviderCallBackLine');
 Auth::routes();
