@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('public/select2/select2.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('public/css/util.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('public/css/main.css') }}">
+    google-site-verification: googledd69b76265653cde.html
 </head>
 <body>
 
