@@ -43,7 +43,7 @@ return [
     'line' => [
       'client_id' => '1654071074',
       'client_secret' => 'e7a71fa5770e37169a0e1dddda5e36a9',
-      'redirect' => 'https://agile-dawn-43433.herokuapp.com/login/line/callback'
+      'redirect' => 'http://localhost:8088/login/line/callback'
 
     ],
 ];

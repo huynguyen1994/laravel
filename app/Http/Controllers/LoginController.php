@@ -10,6 +10,7 @@ use App\Http\Models\User;
 use Session;
 use Socialite;
 
+
 class LoginController extends Controller
 {
 
@@ -106,7 +107,7 @@ class LoginController extends Controller
 
     public function handleProviderCallback()
     {
-        $user = Socialite::driver('facebook')->user();
+        $user = Socialite::driver('facebook')->stateless()->user();
         $authUser = $this->findOrCreateUser($user);
         Auth::login($authUser);
         return redirect('/backend');
@@ -120,7 +121,7 @@ class LoginController extends Controller
         } else {
             return User::create([
                 'name' => $user->name,
-                'email' => $user->email,
+                'email' => $user->email??"",
                 'remember_token' => $user->token,
                 'social_id' => $user->id,
             ]);
@@ -170,7 +171,7 @@ class LoginController extends Controller
     public function callback()
     {
         try {
-            $user = Socialite::driver('google')->user();
+            $user = Socialite::driver('google')->stateless()->user();
         } catch (\Exception $e) {
             return view($this->getView('login'));
         }
@@ -191,20 +192,23 @@ class LoginController extends Controller
         return Socialite::driver('line')->redirect();
     }
 
-    public function handleProviderCallBackLine(Request $request, SocialAccountsService $accountService, $provider)
+    public function handleProviderCallBackLine()
     {
         try {
-            $user = Socialite::with($provider)->user();
+            $user = Socialite::driver('line')->stateless()->user();
         } catch (Exception $e) {
             Session::flash('error', 'Lỗi đăng nhập Line');
             return view($this->getView('login'));
         }
-        $authUser = $accountService->find($user, $provider);
-        if ($authUser) {
-            Auth::login($authUser);
+        $existingUser = User::where('social_id', $user->id)->first();
+        if ($existingUser) {
+            auth()->login($existingUser, true);
             return view($this->getView('backend.dashboard.index'));
         } else {
-            return view($this->getView('/'));
+            $newUser = $this->findOrCreateUser($user);
+            Auth::login($newUser);
+            return view($this->getView('backend.dashboard.index'));
         }
+
     }
 }
