@@ -13,6 +13,18 @@ use Socialite;
 class LoginController extends Controller
 {
 
+    private function getView($viewName)
+    {
+        if (request()->segment(1) == 'amp') {
+            if (view()->exists($viewName . '-amp')) {
+                $viewName .= '-amp';
+            } else {
+                abort(404);
+            }
+        }
+        return $viewName;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -21,13 +33,23 @@ class LoginController extends Controller
     public function index()
     {
         if (Auth::check()) {
-            return redirect('/backend');
+            return view($this->getView('backend.dashboard.index'));
         } else {
-            return view('login');
+            return view($this->getView('login'));
         }
 
     }
 
+    public function index_amp()
+    {
+        return view($this->getView('amp.login-amp'));
+    }
+
+
+    public function shopCartAmp()
+    {
+        return view($this->getView('amp.shopCart-amp'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -59,7 +81,7 @@ class LoginController extends Controller
                 return redirect()->route('backend.dashboard')->with('success', 'Đăng nhập thành công !!!');
             } else {
                 Session::flash('error', 'Email hoặc mật khẩu không đúng!');
-                return redirect('/');
+                return view($this->getView('login'));
             }
         }
     }
@@ -67,7 +89,7 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
-        return redirect('/');
+        return view($this->getView('login'));
     }
 
     /**
@@ -150,40 +172,39 @@ class LoginController extends Controller
         try {
             $user = Socialite::driver('google')->user();
         } catch (\Exception $e) {
-            return redirect('/');
+            return view($this->getView('login'));
         }
 
         $existingUser = User::where('email', $user->email)->first();
         if ($existingUser) {
             auth()->login($existingUser, true);
-            return redirect('/backend');
+            return view($this->getView('backend.dashboard.index'));
         } else {
             $newUser = $this->findOrCreateUser($user);
             Auth::login($newUser);
-            return redirect('/backend');
+            return view($this->getView('backend.dashboard.index'));
         }
     }
 
     public function redirectToProviderLine()
     {
-        return Socialite::driver('line')->stateless()->redirect();
+        return Socialite::driver('line')->redirect();
     }
 
     public function handleProviderCallBackLine(Request $request, SocialAccountsService $accountService, $provider)
     {
         try {
             $user = Socialite::with($provider)->user();
-        }catch (Exception $e) {
+        } catch (Exception $e) {
             Session::flash('error', 'Lỗi đăng nhập Line');
-            return redirect()->route('/');
+            return view($this->getView('login'));
         }
         $authUser = $accountService->find($user, $provider);
         if ($authUser) {
             Auth::login($authUser);
-            return redirect('/backend');
+            return view($this->getView('backend.dashboard.index'));
         } else {
-            \Session::put("line_user_id", $user->id);
-            return redirect()->route('register');
+            return view($this->getView('/'));
         }
     }
 }

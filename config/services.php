@@ -41,9 +41,9 @@ return [
         'redirect' => 'https://agile-dawn-43433.herokuapp.com/callback'
     ],
     'line' => [
-      'client_id' => 'U0319c00908708996bf4cb3e58e440d9b',
+      'client_id' => '1654071074',
       'client_secret' => 'e7a71fa5770e37169a0e1dddda5e36a9',
-//      'redirect' => 'https://agile-dawn-43433.herokuapp.com/ldogin/line/callback'
-      'redirect' => 'http://localhost:8088/api/redirect'
+      'redirect' => 'https://agile-dawn-43433.herokuapp.com/login/line/callback'
+
     ],
 ];

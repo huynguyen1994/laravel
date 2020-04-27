@@ -36,6 +36,10 @@ Route::get('login/facebook/callback', 'LoginController@handleProviderCallback');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('redirect', 'LoginController@redirect');
 Route::get('callback', 'LoginController@callback');
-Route::get('/login/{provider}', 'LoginController@redirectToProviderLine')->name('login.line');
-Route::get('/login/{provider}/callback', 'LoginController@handleProviderCallBackLine');
+Route::get('login/line', 'LoginController@redirectToProviderLine')->name('login.line');
+Route::get('login/line/callback', 'LoginController@handleProviderCallBackLine');
+
+
+Route::get('/login-amp', 'LoginController@index_amp');
+Route::get('/shopcart-amp', 'LoginController@shopCartAmp');
 Auth::routes();

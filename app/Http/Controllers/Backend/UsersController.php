@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Models\User;
-use Illuminate\Http\UploadedFile;
 
+use Webp;
 
 class UsersController extends Controller
 {
@@ -132,15 +132,14 @@ class UsersController extends Controller
     }
     public function updateProfile(Request $request)
     {
-        return redirect('/');
-//        $file = $request->file('photo');
-//
-//        $data = imagewebp($file, 'converted.webp');
-//        echo "<pre>";
-//        var_dump($data);
-//
-//        echo "<pre>";
-//        var_dump($request->all());
-//            dd($request->file('photo'));
+        $file = $request->all();
+        $webp = Webp::make($request->all('photo'));
+        if ($webp->save(public_path('output.webp'))) {
+
+            var_dump(112);
+            die();
+        }
+
+          return redirect('backend/users');
     }
 }

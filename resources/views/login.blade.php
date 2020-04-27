@@ -42,9 +42,9 @@
         <a href="login/facebook" class="btn-face m-b-10">
             <i class="fa fa-facebook-official"></i>Facebook
         </a>
-        {{--<a href="{{ route('login.line', 'line') }}" class="btn-face m-b-10">--}}
-        {{--<i class=""></i>Line--}}
-        {{--</a>--}}
+        <a href="{{ route('login.line', 'line') }}" class="btn-face m-b-10">
+        <i class=""></i>Line
+        </a>
         <a href="redirect" class="btn-google m-b-10">
             <img src="{{ asset('public/images/icons/icon-google.png') }}" alt="GOOGLE">
             Google

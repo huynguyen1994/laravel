@@ -35,8 +35,8 @@ return [
     'drivers' => [
 
         'cwebp' => [
-            'path' => 'cwebp',
-//            'path' => '/usr/local/bin/cwebp',
+//            'path' => 'cwebp',
+            'path' => '/usr/local/bin/cwebp',
         ],
 
     ],
