@@ -61,7 +61,7 @@
                         <div class="col-sm-12 pl-0 p-t-10">
                             <p class="text-right">
                                 <button type="submit" class="btn btn-space btn-primary">{{__('Submit')}}</button>
-                                <button class="btn btn-space btn-secondary">{{__('Cancel')}}</button>
+                                <a href="{{ route('backend.users.index') }}"  class="btn btn-space btn-secondary">{{__('Cancel')}}</a>
                             </p>
                         </div>
                     </form>

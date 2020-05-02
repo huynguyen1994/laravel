@@ -5,14 +5,16 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Models\User;
-
-use Webp;
+use Auth;
+use WebPConvert\WebPConvert;
+use Illuminate\Http\UploadedFile;
 
 class UsersController extends Controller
 {
     public function index()
     {
         $users = User::paginate(10);
+
         return view('backend.users.index', compact('users'));
     }
 
@@ -117,8 +119,8 @@ class UsersController extends Controller
             $user->password = bcrypt($request->password);
             $user->phone = $request->phone;
             $user->birthday = $request->birthday;
-            $success_save = $user->save();
-            if ($success_save) {
+            $success = $user->save();
+            if ($success) {
                 return redirect('backend/users')->with('success', 'Sửa thành công');
             } else {
                 return redirect('backend/users')->with('error', 'Sửa thất bại');
@@ -128,18 +130,52 @@ class UsersController extends Controller
 
     public function editProfile()
     {
-        return view("backend.users.editProfile");
+        $user = Auth::user();
+        $images = json_decode($user->image);
+        return view("backend.users.editProfile")->with(compact('user', 'images'));
     }
+
     public function updateProfile(Request $request)
     {
-        $file = $request->all();
-        $webp = Webp::make($request->all('photo'));
-        if ($webp->save(public_path('output.webp'))) {
+        $rules = [
+            'image' => 'required|image|mimes:jpeg,png,gif,jpg|max:2048',
+        ];
 
-            var_dump(112);
-            die();
+        $customMessages = [
+            'image.required' => 'Chưa chọn File',
+            'image.image' => 'Không phải file hình ảnh',
+            'image.mimes' => 'Upload file jpeg,jpg,png,gif',
+            'image.max' => 'File 2MB'
+        ];
+        $validatedData = $this->validate($request, $rules, $customMessages);
+        if ($validatedData) {
+            if ($request->hasFile('image')) {
+                $nameFile = $request->file('image')->getClientOriginalName();
+                $options = [];
+                $countString = '-' . strlen($request->file('image')->getClientOriginalExtension());
+                $getLastImage = substr($nameFile, (int)$countString);
+                $getNameImage = explode($getLastImage, $nameFile);
+                if ($getNameImage[0]) {
+                    $request->file('image')->move(public_path('images/users'), $nameFile);
+                    $dataImage = [
+                        'image' => $nameFile,
+                        'webp' => $getNameImage[0] . 'webp'
+                    ];
+                    $id = $request->userId;
+                    $user = User::find($id);
+                    $user->image = $dataImage;
+                    $source = public_path('/images/users/'). $nameFile;
+
+                    $destination = public_path('/images/users/') . $getNameImage[0] . 'webp';
+                    WebPConvert::convert($source, $destination, $options);
+                    $success = $user->save();
+                    if ($success) {
+                        return redirect('backend/users')->with('success', 'Thêm hình thành công');
+                    } else {
+                        return redirect('/backend/users/editProfile')->with('error', 'Thêm hình thất bại');
+                    }
+                }
+            }
         }
-
-          return redirect('backend/users');
     }
 }

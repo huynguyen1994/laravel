@@ -35,7 +35,8 @@
                     </li>
                     <li class="nav-item dropdown nav-user">
                         <div class="p-l-20">
-                        <?php    $user = Auth::user()->name; echo $user??""; ?>
+                        <?php    $user = Auth::user()->name;?>
+                            <a href="{{ route('backend.users.editProfile') }}"> {{ $user??"" }}</a>
                         </div>
                         <a class="dropdown-item" href="{{ route('logout') }}"><i class="fas fa-power-off mr-2"></i>Logout</a>
                     </li>
@@ -99,14 +100,14 @@
 <script src="{{ asset('public/assets/vendor/bootstrap/js/bootstrap.bundle.js') }}"></script>
 <script src="{{ asset('public/assets/vendor/slimscroll/jquery.slimscroll.js') }}"></script>
 <script src="{{ asset('public/assets/libs/js/main-js.js') }}"></script>
-<script src="{{ asset('public/assets/vendor/charts/chartist-bundle/chartist.min.js') }}"></script>
+{{--<script src="{{ asset('assets/vendor/charts/chartist-bundle/chartist.min.js') }}"></script>--}}
 <script src="{{ asset('public/assets/vendor/charts/sparkline/jquery.sparkline.js') }}"></script>
 <script src="{{ asset('public/assets/vendor/charts/morris-bundle/raphael.min.js') }}"></script>
 <script src="{{ asset('public/assets/vendor/charts/morris-bundle/morris.js') }}"></script>
 <script src="{{ asset('public/assets/vendor/charts/c3charts/c3.min.js') }}"></script>
 <script src="{{ asset('public/assets/vendor/charts/c3charts/d3-5.4.0.min.js') }}"></script>
 <script src="{{ asset('public/assets/vendor/charts/c3charts/C3chartjs.js') }}"></script>
-<script src="{{ asset('public/assets/libs/js/dashboard-ecommerce.js') }}"></script>
+{{--<script src="{{ asset('assets/libs/js/dashboard-ecommerce.js') }}"></script>--}}
 <script src="{{ asset('public/assets/vendor/parsley/parsley.js') }}" ></script>
 </body>
 </html>

@@ -40,6 +40,7 @@
                                 <th class="border-0">EMAIL</th>
                                 <th class="border-0">BIRTHDAY</th>
                                 <th class="border-0">PHONE</th>
+                                <th class="border-0">Image</th>
                                 <th class="border-0">Action</th>
                             </tr>
                             </thead>
@@ -48,11 +49,21 @@
                                 <?php $i = 1; ?>
                                 @foreach ($users as $item)
                             <tr>
-                                <td ><?php echo $i++; ?></td>
+                                <td >{{ $i++ }}</td>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->email }}</td>
                                 <td>{{ $item->birthday }}</td>
                                 <td>{{ $item->phone }}</td>
+                                <td>
+                                    <?php $images = json_decode($item->image); ?>
+                                    @if ($item->image)
+                                    <picture>
+                                        <source srcset="{{ asset('public/images/users/').$images->webp }}" type="image/webp">
+                                        <source srcset="{{ asset('public/images/users/'. $images->image) }}" type="image/jpeg">
+                                        <img src="{{ asset('public/images/users/'. $images->image) }}" width="100">
+                                    </picture>
+                                    @endif
+                                </td>
                                 <td>
                                     <a href="{{ url('backend/users/edit', $item->id) }}" class="btn btn-success fas fa-edit"></a>
                                     <a href="{{ url('backend/users/destroy', $item->id) }}" class="btn btn-danger  fas fa-trash"></a>

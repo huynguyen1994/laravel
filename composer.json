@@ -17,6 +17,7 @@
         "laravel/socialite": "^4.3",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
+        "rosell-dk/webp-convert": "^2.3",
         "socialiteproviders/line": "^2.1"
     },
     "require-dev": {
