@@ -10,6 +10,6 @@ CREATE TABLE users (
 	birthday DATE,
 	created_at TIMESTAMP,
 	updated_at TIMESTAMP,
-
+	SET CLIENT_ENCODING TO 'utf8';
 	PRIMARY KEY (id)
 );
