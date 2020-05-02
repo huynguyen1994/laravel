@@ -58,15 +58,15 @@
                                     <?php $images = json_decode($item->image); ?>
                                     @if ($item->image)
                                     <picture>
-                                        <source srcset="{{ asset('images/users/'. $images->webp) }}" type="image/webp">
-                                        <source srcset="{{ asset('images/users/'. $images->image) }}" type="image/jpg">
-                                        <img src="{{ asset('images/users/'. $images->image) }}" width="100">
+                                        <source srcset="{{ asset('public/images/users/'. $images->webp) }}" type="image/webp">
+                                        <source srcset="{{ asset('public/images/users/'. $images->image) }}" type="image/jpg">
+                                        <img src="{{ asset('public/images/users/'. $images->image) }}" width="100">
                                     </picture>
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ url('backend/users/edit', $item->id) }}" class="btn btn-success fas fa-edit"></a>
-                                    <a href="{{ url('backend/users/destroy', $item->id) }}" class="btn btn-danger  fas fa-trash"></a>
+                                    <a href="{{ url('public/backend/users/edit', $item->id) }}" class="btn btn-success fas fa-edit"></a>
+                                    <a href="{{ url('public/backend/users/destroy', $item->id) }}" class="btn btn-danger  fas fa-trash"></a>
                                 </td>
                             </tr>
                                 @endforeach
