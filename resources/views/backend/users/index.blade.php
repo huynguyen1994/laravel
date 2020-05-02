@@ -58,9 +58,9 @@
                                     <?php $images = json_decode($item->image); ?>
                                     @if ($item->image)
                                     <picture>
-                                        <source srcset="{{ asset('public/images/users/').$images->webp }}" type="image/webp">
-                                        <source srcset="{{ asset('public/images/users/'. $images->image) }}" type="image/jpeg">
-                                        <img src="{{ asset('public/images/users/'. $images->image) }}" width="100">
+                                        <source srcset="{{ asset('images/users/'. $images->webp) }}" type="image/webp">
+                                        <source srcset="{{ asset('images/users/'. $images->image) }}" type="image/jpg">
+                                        <img src="{{ asset('images/users/'. $images->image) }}" width="100">
                                     </picture>
                                     @endif
                                 </td>
