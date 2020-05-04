@@ -6,9 +6,7 @@
                 <h5 class="card-header">{{ __('Edit User') }}</h5>
                 <div class="card-body">
                     <form class="needs-validation" novalidate method="post" action="{{ route('backend.users.update', $user->id) }}">
-
                         @csrf
-
                         <div class="row">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 p-b-5">
                                 @if ($errors->any())

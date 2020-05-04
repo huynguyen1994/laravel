@@ -13,7 +13,12 @@ use Socialite;
 
 class LoginController extends Controller
 {
-
+    /**
+     * Get View Amp
+     *
+     * @param  String $viewName
+     *
+     */
     private function getView($viewName)
     {
         if (request()->segment(1) == 'amp') {
@@ -27,9 +32,11 @@ class LoginController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a login
      *
-     * @return \Illuminate\Http\Response
+     *
+     * @return Auth
+     *
      */
     public function index()
     {
@@ -41,16 +48,27 @@ class LoginController extends Controller
 
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     *
+     */
     public function index_amp()
     {
         return view($this->getView('amp.login-amp'));
     }
 
 
+    /**
+     * Display a listing of the shop.
+     *
+     *
+     */
     public function shopCartAmp()
     {
         return view($this->getView('amp.shopCart-amp'));
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -87,6 +105,12 @@ class LoginController extends Controller
         }
     }
 
+    /**
+     * LogOut
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function logout(Request $request)
     {
         Auth::logout();
@@ -94,10 +118,10 @@ class LoginController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Redirect To Provider
      *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return  Redirect
+     * @return  Socialite
      */
     public function redirectToProvider()
     {
@@ -105,6 +129,14 @@ class LoginController extends Controller
         return Socialite::driver('facebook')->redirect();
     }
 
+    /**
+     * Handle Provider Callback
+     *
+     * @return \Illuminate\Http\Response
+     * @return  Auth
+     * @return  Redirect
+     * @return  Socialite
+     */
     public function handleProviderCallback()
     {
         $user = Socialite::driver('facebook')->stateless()->user();
@@ -113,6 +145,12 @@ class LoginController extends Controller
         return redirect('/backend');
     }
 
+    /**
+     * Find Or Create User
+     *
+     * @param  Id $user
+     *
+     */
     private function findOrCreateUser($user)
     {
         $authUser = User::where('social_id', $user->id)->first();
@@ -162,12 +200,23 @@ class LoginController extends Controller
         //
     }
 
+    /**
+     * Redirect
+     *
+     * @return  Redirect
+     * @return  Socialite
+     */
     public function redirect()
     {
         return Socialite::driver('google')->redirect();
     }
 
-
+    /**
+     * Callback
+     *
+     * @return Socialite
+     * @return Auth
+     */
     public function callback()
     {
         try {
@@ -187,11 +236,24 @@ class LoginController extends Controller
         }
     }
 
+    /**
+     * Redirect To Provider Line
+     *
+     * @return  Redirect
+     * @return  Socialite
+     */
     public function redirectToProviderLine()
     {
         return Socialite::driver('line')->redirect();
     }
 
+    /**
+     * Handle Provider CallBack Line
+     *
+     * @return  Redirect
+     * @return  Socialite
+     * @return Session
+     */
     public function handleProviderCallBackLine()
     {
         try {

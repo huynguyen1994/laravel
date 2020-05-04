@@ -11,6 +11,11 @@ use Illuminate\Http\UploadedFile;
 
 class UsersController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     *
+     */
     public function index()
     {
         $users = User::paginate(10);
@@ -18,11 +23,22 @@ class UsersController extends Controller
         return view('backend.users.index', compact('users'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
         return view('backend.users.create');
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
         $rules = [
@@ -69,6 +85,12 @@ class UsersController extends Controller
         }
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
     public function destroy($id)
     {
         $user = User::find($id);
@@ -80,6 +102,12 @@ class UsersController extends Controller
         }
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
     public function edit($id)
     {
         $user = User::find($id);
@@ -90,6 +118,13 @@ class UsersController extends Controller
         }
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, $id)
     {
         $rules = [
@@ -128,6 +163,11 @@ class UsersController extends Controller
         }
     }
 
+    /**
+     * Show the form for editing Profile the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function editProfile()
     {
         $user = Auth::user();
@@ -135,6 +175,12 @@ class UsersController extends Controller
         return view("backend.users.editProfile")->with(compact('user', 'images'));
     }
 
+    /**
+     * Update Profile the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function updateProfile(Request $request)
     {
         $rules = [
@@ -164,8 +210,7 @@ class UsersController extends Controller
                     $id = $request->userId;
                     $user = User::find($id);
                     $user->image = $dataImage;
-                    $source = public_path('/images/users/'). $nameFile;
-
+                    $source = public_path('/images/users/') . $nameFile;
                     $destination = public_path('/images/users/') . $getNameImage[0] . 'webp';
                     WebPConvert::convert($source, $destination, $options);
                     $success = $user->save();

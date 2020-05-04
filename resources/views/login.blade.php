@@ -1,6 +1,5 @@
 @extends("layouts.master")
 @section("main")
-
     <form class="login100-form validate-form" method="post" action="{{url('post-login')}}">
         @csrf
         <span class="login100-form-title p-b-55">
